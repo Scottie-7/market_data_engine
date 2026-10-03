@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-import asyncio
 
 class MarketDataSource(ABC):
     def __init__(self, provider_name: str):
@@ -8,10 +7,10 @@ class MarketDataSource(ABC):
 
     @abstractmethod
     async def connect(self) -> bool:
-        """Authenticate with the provider."""
+        """Authenticate and establish websocket connections."""
         pass
 
     @abstractmethod
-    async def stream_data(self, symbol: str, queue: asyncio.Queue):
-        """Stream data into the shared queue."""
+    async def stream_data(self, symbol: str, queue):
+        """Stream L1/L2 data into the shared async queue."""
         pass
